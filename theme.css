@@ -1,5 +1,5 @@
 /* ==========================================================================
-Holz-Theme v1.2.0 – Elegantes Holz & Glasmorphismus
+Holz-Theme v1.2.1 – Clean Glassmorphism
 Ziel: Jellyfin 10.9+ / 12.x Modern Layout
 ========================================================================== */
 
@@ -25,14 +25,13 @@ Ziel: Jellyfin 10.9+ / 12.x Modern Layout
 --glass-blur:      18px;
 --glass-shadow:    0 8px 32px rgba(0, 0, 0, 0.45);
 
-/* Hintergrundbild: Zuverlässiges Holz-Textur-Fallback.
-Du kannst deine eigene URL hier einsetzen! */
+/* Hintergrundbild: Platzhalter aus Unsplash */
 --bg-image: url("https://images.unsplash.com/photo-1546484475-7f7bd55792da?q=80&w=2000&auto=format&fit=crop");
 
 color-scheme: dark;
 }
 
-/* ---------- 2. Transparenz-Overrides (Entfernt alle schwarzen Kästen) ------- */
+/* ---------- 2. Transparenz-Overrides --------------------------------------- */
 html,
 body,
 #reactRoot,
@@ -63,11 +62,14 @@ background-color: var(--wood-darkest) !important;
 body::before {
 content: "";
 position: fixed;
-inset: 0;
+top: 0;
+left: 0;
+right: 0;
+bottom: 0;
 z-index: -2;
 pointer-events: none;
 background-image:
-linear-gradient(180deg, rgba(15, 10, 6, 0.4) 0%, rgba(15, 10, 6, 0.7) 100%),
+linear-gradient(180deg, rgba(15, 10, 6, 0.4) 0%, rgba(15, 10, 6, 0.75) 100%),
 var(--bg-image);
 background-size: cover;
 background-position: center;
@@ -85,7 +87,6 @@ border-bottom: 1px solid var(--glass-border) !important;
 box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 }
 
-/* Tab-Leiste (Home, Favorites etc.) schlicht & ohne schwarzen Kasten */
 .headerTabs,
 .emby-tabs-slider {
 background: transparent !important;
@@ -115,7 +116,7 @@ box-shadow: 0 2px 10px rgba(223, 155, 66, 0.4);
 color: var(--wood-darkest) !important;
 }
 
-/* ---------- 5. Abschnittstitel ("Recently Added" etc.) --------------------- */
+/* ---------- 5. Abschnittstitel --------------------------------------------- */
 .sectionTitleContainer {
 background: transparent !important;
 box-shadow: none !important;
@@ -140,7 +141,7 @@ background: transparent !important;
 color: var(--honey-hover) !important;
 }
 
-/* ---------- 6. Medienkarten & Poster --------------------------------------- */
+/* ---------- 6. Karten & Poster --------------------------------------------- */
 .cardBox {
 border-radius: 10px;
 background: transparent !important;
@@ -167,7 +168,6 @@ color: var(--cream) !important;
 color: var(--muted) !important;
 }
 
-/* Play/Overlay Buttons auf den Postern */
 .cardOverlayButton {
 background: var(--glass-bg-strong) !important;
 border: 1px solid var(--border) !important;
@@ -201,7 +201,7 @@ color: var(--wood-darkest) !important;
 border-color: var(--honey-hover) !important;
 }
 
-/* ---------- 8. Seitenleiste & Menüs (Drawer) ------------------------------ */
+/* ---------- 8. Menüs & Seitenleisten --------------------------------------- */
 .mainDrawer,
 .sidebarContainer,
 dialog,
