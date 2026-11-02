@@ -8,7 +8,7 @@ Ein warmes, dunkles Theme im Holz-Look mit Honig-Akzenten für Jellyfin.
 2. Im Feld **Benutzerdefiniertes CSS** diese Zeile einfügen:
 
    ```css
-   @import url("https://cdn.jsdelivr.net/gh/DEIN-USERNAME/jellyfin-wood-theme@v1.0.0/theme.css");
+   @import url("https://cdn.jsdelivr.net/gh/RandomDude789-ux/jellyfin-wood-theme@v1.0.0/theme.css");
    ```
 
 3. Speichern und die Seite mit Strg + F5 neu laden.
