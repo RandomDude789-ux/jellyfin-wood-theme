@@ -1,5 +1,6 @@
-/* Holz-Theme v1.0.0 – warm & rustikal */
+/* Holz-Theme v1.0.1 – warm & rustikal (Jellyfin 12.x) */
 
+/* ---------- 1. Farbvariablen ---------- */
 :root {
   --wood-darkest: #1a120c;
   --wood-dark:    #241912;
@@ -10,9 +11,11 @@
   --honey:        #d89a4a;
   --honey-hover:  #e9b26c;
   --border:       rgba(216, 154, 74, 0.22);
+
+  color-scheme: dark;
 }
 
-/* Hintergrund mit feiner Holzmaserung */
+/* ---------- 2. Grundlayout (elementbasiert, versionsunabhängig) ---------- */
 body {
   color: var(--cream);
   background-color: var(--wood-darkest);
@@ -24,90 +27,48 @@ body {
   background-attachment: fixed;
 }
 
-/* Seitenleiste und Kopfzeile */
-.skinHeader,
-.mainDrawer {
-  background: linear-gradient(180deg, var(--wood-dark), var(--wood-darkest));
-  border-color: var(--border);
-}
-
-/* Überschriften und Text */
-h1, h2, h3, .sectionTitle {
+h1, h2, h3 {
   color: var(--cream);
   letter-spacing: 0.02em;
 }
 
-.secondary,
-.cardText-secondary {
-  color: var(--muted);
+a {
+  color: var(--honey);
 }
 
-/* Karten (Poster, Serien, Alben) */
-.cardBox,
-.card {
-  border-radius: 6px;
-}
-
-.cardOverlayButton,
-.cardImageContainer {
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.45);
-}
-
-.cardBox:hover .cardImageContainer {
-  box-shadow: 0 0 0 2px var(--honey), 0 6px 18px rgba(0, 0, 0, 0.6);
+a:hover {
+  color: var(--honey-hover);
 }
 
 /* Buttons */
-.emby-button,
-.raised {
-  background: var(--wood-light);
-  color: var(--cream);
+button {
   border: 1px solid var(--border);
   border-radius: 4px;
   transition: background 0.2s ease, border-color 0.2s ease;
 }
 
-.emby-button:hover,
-.raised:hover {
-  background: var(--honey);
-  color: var(--wood-darkest);
+button:hover {
   border-color: var(--honey-hover);
 }
 
 /* Eingabefelder */
-.emby-input,
-.emby-select,
-.emby-textarea {
+input,
+select,
+textarea {
   background: var(--wood-dark);
   color: var(--cream);
   border: 1px solid var(--border);
   border-radius: 4px;
 }
 
-.emby-input:focus,
-.emby-select:focus,
-.emby-textarea:focus {
+input:focus,
+select:focus,
+textarea:focus {
   border-color: var(--honey);
   outline: none;
 }
 
-/* Navigation: aktiver Eintrag */
-.navMenuOption-selected,
-.navMenuOption.selected {
-  color: var(--honey);
-  border-left: 3px solid var(--honey);
-}
-
-/* Fortschrittsbalken */
-.itemProgressBar {
-  background: var(--wood-light);
-}
-
-.itemProgressBarForeground {
-  background: var(--honey);
-}
-
-/* Dezente Scrollleiste */
+/* Scrollleiste */
 ::-webkit-scrollbar {
   width: 10px;
 }
@@ -124,3 +85,7 @@ h1, h2, h3, .sectionTitle {
 ::-webkit-scrollbar-thumb:hover {
   background: var(--honey);
 }
+
+/* ---------- 3. Oberfläche im 12.x-Layout ----------
+   Hier kommen die Klassen rein, sobald wir sie per F12 bestätigt haben.
+   Bis dahin bleibt dieser Block leer, damit nichts Falsches greift. */
