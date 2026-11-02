@@ -1,185 +1,50 @@
 /* ==========================================================================
-Holz-Theme v1.3.0 – Functional Clean Fix
-Ziel: Jellyfin 10.9+ / 12.x
-========================================================================== */
+   Jellyfin Holz- & Glas-Theme
+   ========================================================================== */
 
-/* ---------- 1. Variablen --------------------------------------------------- /
-:root {
-/ Holztöne */
---wood-darkest: #140d08;
---wood-dark:    #1f140e;
---wood-mid:     #2f1d13;
---wood-light:   #462d1d;
-
-/* Text und Akzente */
---cream:        #f5e8d5;
---muted:        #c2a788;
---honey:        #df9b42;
---honey-hover:  #f0b25e;
---border:       rgba(223, 155, 66, 0.25);
-
-/* Glas */
---glass-bg:        rgba(26, 17, 11, 0.65);
---glass-bg-strong: rgba(20, 13, 8, 0.85);
---glass-border:    rgba(245, 232, 213, 0.15);
---glass-blur:      16px;
-
-/* Funktionierender Holz-Hintergrund (Unsplash Platzhalter) */
---bg-image: url("https://images.unsplash.com/photo-1546484475-7f7bd55792da?q=80&w=2000&auto=format&fit=crop");
-
-color-scheme: dark;
-}
-
-/* ---------- 2. Globaler Holz-Hintergrund ----------------------------------- */
+/* 1. Transparenz für alle Jellyfin-Hintergründe erzwingen */
 html,
-body {
-background-color: var(--wood-darkest) !important;
-background-image: linear-gradient(180deg, rgba(15, 10, 6, 0.3) 0%, rgba(15, 10, 6, 0.7) 100%), var(--bg-image) !important;
-background-size: cover !important;
-background-position: center !important;
-background-attachment: fixed !important;
-background-repeat: no-repeat !important;
-color: var(--cream) !important;
-}
-
-/* ---------- 3. Jellyfin Container Transparent Schalten --------------------- */
+body,
 #reactRoot,
 #reactRoot > div,
 .skinBody,
-.page,
 .mainAnimatedPage,
 .libraryDocument,
 .withSectionTabs,
 .verticalSection,
 .emby-scroller-container,
-.emby-scrollbuttons,
-.contentPrimary,
-.backgroundContainer,
-.mainLayout,
-.pageTabContent,
-.itemDetailPage,
-.detailPagePrimaryContainer,
-.sectionTitleContainer {
-background: transparent !important;
-background-color: transparent !important;
-box-shadow: none !important;
+.backgroundContainer {
+  background: transparent !important;
+  background-color: transparent !important;
 }
 
-/* ---------- 4. Header & Top-Navigation ------------------------------------- */
+/* 2. Hintergrundbild setzen (Grafik von deinem GitHub Raw-Link) */
+html {
+  background-color: #1a120c !important;
+  background-image: 
+    linear-gradient(180deg, rgba(26, 18, 12, 0.45) 0%, rgba(26, 18, 12, 0.75) 100%),
+    url("https://raw.githubusercontent.com/RandomDude789-ux/jellyfin-wood-theme/main/assets/wood.jpeg") !important;
+  background-size: cover !important;
+  background-position: center !important;
+  background-attachment: fixed !important;
+  background-repeat: no-repeat !important;
+}
+
+/* 3. Lesbarkeit von Texten sicherstellen */
+body, h1, h2, h3, .sectionTitle, .emby-button {
+  color: #f3e6d3 !important;
+}
+
+/* 4. Glas-Optik für Navigation und Buttons */
 .skinHeader,
-.headerTop {
-background: var(--glass-bg) !important;
--webkit-backdrop-filter: blur(var(--glass-blur));
-backdrop-filter: blur(var(--glass-blur));
-border-bottom: 1px solid var(--glass-border) !important;
-}
-
 .headerTabs,
-.emby-tabs-slider {
-background: transparent !important;
-}
-
 .emby-tab-button {
-color: var(--muted) !important;
-font-weight: 600;
-border-radius: 20px !important;
-padding: 6px 16px !important;
-margin: 0 4px !important;
-transition: all 0.2s ease !important;
-}
-
-.emby-tab-button:hover {
-color: var(--cream) !important;
-background: rgba(223, 155, 66, 0.15) !important;
+  background: rgba(36, 25, 18, 0.65) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  backdrop-filter: blur(12px) !important;
 }
 
 .emby-tab-button-active {
-color: var(--wood-darkest) !important;
-background: var(--honey) !important;
-}
-
-.emby-tab-button-active .tabButtonText {
-color: var(--wood-darkest) !important;
-}
-
-/* ---------- 5. Typografie & Titel ------------------------------------------- */
-.sectionTitle,
-.sectionTitle-cards,
-h1, h2, h3 {
-color: var(--cream) !important;
-letter-spacing: 0.02em;
-text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
-}
-
-.sectionTitleButton {
-color: var(--honey) !important;
-background: transparent !important;
-}
-
-/* ---------- 6. Karten & Hover-Effekt --------------------------------------- */
-.cardBox {
-background: transparent !important;
-}
-
-.cardImageContainer {
-border-radius: 8px !important;
-border: 1px solid rgba(245, 232, 213, 0.1);
-transition: transform 0.2s ease, border-color 0.2s ease !important;
-}
-
-.cardBox:hover .cardImageContainer {
-transform: translateY(-4px);
-border-color: var(--honey) !important;
-}
-
-.cardText {
-color: var(--cream) !important;
-}
-
-.cardText-secondary {
-color: var(--muted) !important;
-}
-
-/* ---------- 7. Buttons & Menüs --------------------------------------------- */
-.emby-scrollbuttons-button {
-color: var(--cream) !important;
-background: var(--glass-bg-strong) !important;
-border: 1px solid var(--glass-border) !important;
-border-radius: 50% !important;
--webkit-backdrop-filter: blur(10px);
-backdrop-filter: blur(10px);
-}
-
-.emby-scrollbuttons-button:hover:not(:disabled) {
-background: var(--honey) !important;
-color: var(--wood-darkest) !important;
-}
-
-.mainDrawer,
-.sidebarContainer,
-dialog,
-.paperList {
-background: var(--glass-bg-strong) !important;
--webkit-backdrop-filter: blur(var(--glass-blur));
-backdrop-filter: blur(var(--glass-blur));
-border-right: 1px solid var(--glass-border);
-}
-
-/* ---------- 8. Scrollbar --------------------------------------------------- */
-::-webkit-scrollbar {
-width: 8px;
-height: 8px;
-}
-
-::-webkit-scrollbar-track {
-background: rgba(20, 13, 8, 0.5);
-}
-
-::-webkit-scrollbar-thumb {
-background: var(--wood-light);
-border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-background: var(--honey);
+  background: #d89a4a !important;
+  color: #1a120c !important;
 }
