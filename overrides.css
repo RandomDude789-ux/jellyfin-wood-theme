@@ -1,0 +1,37 @@
+/* ==========================================================================
+   Holz-Overrides für Jamfin (Glasmorphism)
+   Lädt NACH dem Jamfin-Theme und überschreibt nur die Farbvariablen.
+   Jamfin-Variablen laut Dokumentation: --theme-* (Farben, Radius, Blur).
+   ========================================================================== */
+
+:root {
+  /* Holzfarben */
+  --theme-background-colour: #1a120c;
+  --theme-sidebar-background-colour: rgba(36, 25, 18, 0.72);
+  --theme-menu-background-colour: rgba(51, 36, 26, 0.55);
+  --theme-menu-shadow-colour: rgba(0, 0, 0, 0.35);
+
+  /* Akzente: Grau-Töne von Jamfin durch Honig und Creme ersetzen */
+  --theme-base-colour: #d89a4a;
+  --theme--hover-colour: #e9b26c;
+
+  /* Fortschrittsbalken in Holz/Honig */
+  --theme-progress-bar-colour: #d89a4a;
+  --theme-progress-bar-background-colour: #33241a;
+  --theme-progress-bar-transcoding-colour: #bfa786;
+
+  /* Glas: etwas weicher und rundere Ecken für den warmen Look */
+  --theme-roundness: 0.75rem;
+  --theme-blur: 16px;
+}
+
+/* Hintergrundbild, falls Jamfin den Body nicht verdeckt.
+   Hinweis: Diese Zeile ersetzt nichts, sie ergänzt nur den Hintergrund. */
+body {
+  background-image:
+    linear-gradient(180deg, rgba(26, 18, 12, 0.35) 0%, rgba(26, 18, 12, 0.7) 100%),
+    url("https://cdn.jsdelivr.net/gh/RandomDude789-ux/jellyfin-wood-theme/assets/wood.jpeg");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
