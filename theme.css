@@ -171,5 +171,68 @@ textarea:focus {
 }
 
 /* ---------- 8. Oberfläche im 12.x-Layout -----------------------------------
-   Klassenbasierte Regeln (Poster-Karten, Seitenmenü, aktiver Eintrag,
-   Fortschrittsbalken). Kommt nach der F12-Prüfung hierher. */
+   Klassen aus der F12-Prüfung auf Jellyfin 12.x. */
+
+/* Schwarze Container transparent machen, damit das Holzbild durchscheint */
+.libraryDocument,
+.withSectionTabs,
+.mainAnimatedPage,
+.verticalSection,
+.emby-scroller-container,
+.emby-scrollbuttons {
+  background-color: transparent !important;
+}
+
+/* Abschnittstitel (z. B. „Continue Watching“) */
+.sectionTitle,
+.sectionTitle-cards {
+  color: var(--cream);
+  letter-spacing: 0.02em;
+}
+
+/* Pfeile ‹ › neben den Zeilen */
+.emby-scrollbuttons-button {
+  color: var(--honey);
+  background: rgba(36, 25, 18, 0.6);
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.emby-scrollbuttons-button:hover:not(:disabled) {
+  background: var(--honey);
+  color: var(--wood-darkest);
+}
+
+.emby-scrollbuttons-button:disabled {
+  opacity: 0.3;
+}
+
+/* Karten: Glas-Rahmen und warmer Schatten */
+.cardBox {
+  border-radius: 8px;
+}
+
+.cardImageContainer {
+  border-radius: 6px;
+  box-shadow: var(--glass-shadow);
+}
+
+.cardBox:hover .cardImageContainer {
+  box-shadow: 0 0 0 2px var(--honey), 0 6px 18px rgba(0, 0, 0, 0.6);
+}
+
+/* Overlay-Buttons auf Karten (Play, Häkchen, Herz) als Glas */
+.cardOverlayButton {
+  background: rgba(36, 25, 18, 0.7);
+  border: 1px solid var(--border);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+
+.cardOverlayButton:hover {
+  background: var(--honey);
+  color: var(--wood-darkest);
+}
