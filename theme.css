@@ -1,238 +1,277 @@
 /* ==========================================================================
-   Holz-Theme v1.1.0 – warm, rustikal, Glasmorphism
-   Ziel: Jellyfin 12.x (Modern Layout)
-   ========================================================================== */
+Holz-Theme v1.1.0 – warm, rustikal, Glasmorphism
+Ziel: Jellyfin 10.9+ / 12.x Modern Layout
+========================================================================== */
 
-/* ---------- 1. Variablen ---------------------------------------------------
-   Hier ändern sich Farben, Glasstärke und das Hintergrundbild zentral.
-   --bg-image: die Bildadresse einfügen, z. B.
-   url("https://i.imgur.com/XXXXXXX.jpg")
-   ------------------------------------------------------------------------- */
+/* ---------- 1. Variablen --------------------------------------------------- /
 :root {
-  /* Holztöne */
-  --wood-darkest: #1a120c;
-  --wood-dark:    #241912;
-  --wood-mid:     #33241a;
-  --wood-light:   #46321f;
+/ Holztöne */
+--wood-darkest: #1a120c;
+--wood-dark:    #241912;
+--wood-mid:     #33241a;
+--wood-light:   #46321f;
 
-  /* Text und Akzente */
-  --cream:        #f3e6d3;
-  --muted:        #bfa786;
-  --honey:        #d89a4a;
-  --honey-hover:  #e9b26c;
-  --border:       rgba(216, 154, 74, 0.22);
+/* Text und Akzente */
+--cream:        #f3e6d3;
+--muted:        #bfa786;
+--honey:        #d89a4a;
+--honey-hover:  #e9b26c;
+--border:       rgba(216, 154, 74, 0.22);
 
-  /* Glas */
-  --glass-bg:     rgba(36, 25, 18, 0.55);
-  --glass-bg-strong: rgba(26, 18, 12, 0.72);
-  --glass-border: rgba(243, 230, 211, 0.12);
-  --glass-blur:   16px;
-  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+/* Glas */
+--glass-bg:        rgba(36, 25, 18, 0.65);
+--glass-bg-strong: rgba(26, 18, 12, 0.85);
+--glass-border:    rgba(243, 230, 211, 0.12);
+--glass-blur:      16px;
+--glass-shadow:    0 8px 32px rgba(0, 0, 0, 0.35);
 
-  /* Hintergrund (Platzhalter, wird durch dein Bild ersetzt) */
-  --bg-image:     url("https://cdn.jsdelivr.net/gh/RandomDude789-ux/jellyfin-wood-theme/assets/wood.jpeg");
+/* Hintergrundbild */
+--bg-image: url("https://cdn.jsdelivr.net/gh/RandomDude789-ux/jellyfin-wood-theme/assets/wood.jpeg");
 
-  color-scheme: dark;
+color-scheme: dark;
 }
 
-/* ---------- 2. Hintergrund -------------------------------------------------
-   Bild liegt fest hinter der Oberfläche. Ohne Bild bleibt die Holzmaserung. */
+/* ---------- 2. Hintergrund & Transparenz ---------------------------------- */
 html,
 body {
-  background-color: var(--wood-darkest);
+background-color: var(--wood-darkest) !important;
+color: var(--cream);
 }
 
 body {
-  color: var(--cream);
-  background-image:
-    var(--bg-image),
-    repeating-linear-gradient(92deg,
-      rgba(255, 255, 255, 0.015) 0 2px,
-      transparent 2px 11px),
-    linear-gradient(180deg, var(--wood-mid) 0%, var(--wood-darkest) 70%);
-  background-size: cover, auto, auto;
-  background-position: center, center, center;
-  background-attachment: fixed;
-  background-repeat: no-repeat, repeat, no-repeat;
+background-image:
+var(--bg-image),
+repeating-linear-gradient(92deg,
+rgba(255, 255, 255, 0.015) 0 2px,
+transparent 2px 11px),
+linear-gradient(180deg, var(--wood-mid) 0%, var(--wood-darkest) 70%);
+background-size: cover, auto, auto;
+background-position: center, center, center;
+background-attachment: fixed;
+background-repeat: no-repeat, repeat, no-repeat;
 }
 
-/* Bildlayer: fest hinter der Oberfläche, mit warmem Schleier für Lesbarkeit.
-   Als eigene Ebene auf html, damit Jellyfin-Container ihn nicht verdecken. */
+/* Fixer Schleier für Kontrast & Lesbarkeit */
 html::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-  background-image:
-    linear-gradient(180deg, rgba(26, 18, 12, 0.35) 0%, rgba(26, 18, 12, 0.65) 100%),
-    var(--bg-image);
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+content: "";
+position: fixed;
+inset: 0;
+z-index: -1;
+pointer-events: none;
+background-image:
+linear-gradient(180deg, rgba(26, 18, 12, 0.45) 0%, rgba(26, 18, 12, 0.75) 100%),
+var(--bg-image);
+background-size: cover;
+background-position: center;
+background-repeat: no-repeat;
 }
 
-/* Jellyfin-Container dürfen den Hintergrund nicht verdecken */
+/* Schwarze Hintergründe von Jellyfin aufheben */
 body,
 #reactRoot,
 #reactRoot > div,
 .mainAnimatedPage,
-.skinBody {
-  background-color: transparent;
+.skinBody,
+.page,
+.libraryDocument,
+.withSectionTabs,
+.verticalSection,
+.emby-scroller-container,
+.emby-scrollbuttons,
+.contentPrimary {
+background-color: transparent !important;
+background: transparent !important;
 }
 
-/* ---------- 3. Typografie --------------------------------------------------- */
-h1, h2, h3 {
-  color: var(--cream);
-  letter-spacing: 0.02em;
+/* ---------- 3. Typografie & Links ----------------------------------------- */
+h1, h2, h3, h4, h5, h6,
+.sectionTitle,
+.sectionTitle-cards {
+color: var(--cream) !important;
+letter-spacing: 0.02em;
 }
 
-a {
-  color: var(--honey);
-  transition: color 0.2s ease;
+a,
+.button-flat {
+color: var(--honey);
+transition: color 0.2s ease;
 }
 
-a:hover {
-  color: var(--honey-hover);
+a:hover,
+.button-flat:hover {
+color: var(--honey-hover);
 }
 
-/* ---------- 4. Glas-Oberflächen (Kopfzeile, Menüs, Dialoge) ---------------
-   Element-basiert, damit es unabhängig von Klassennamen wirkt. */
-header,
-aside,
-nav,
-dialog {
-  background: var(--glass-bg);
-  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(120%);
-  backdrop-filter: blur(var(--glass-blur)) saturate(120%);
-  border: 1px solid var(--glass-border);
-  box-shadow: var(--glass-shadow);
-  color: var(--cream);
+/* ---------- 4. Glasmorphismus Header & Menüs ------------------------------ /
+/ Top Header Bar */
+.skinHeader,
+.headerTop,
+.headerRight,
+.headerLeft {
+background: var(--glass-bg) !important;
+-webkit-backdrop-filter: blur(var(--glass-blur)) saturate(120%);
+backdrop-filter: blur(var(--glass-blur)) saturate(120%);
+border-bottom: 1px solid var(--glass-border);
 }
 
-dialog {
-  background: var(--glass-bg-strong);
-  border-radius: 10px;
+/* Seitliche Navigation / Drawer & Dialoge */
+.mainDrawer,
+.sidebarContainer,
+dialog,
+.dialog,
+.paperList,
+.formDialogFooter {
+background: var(--glass-bg-strong) !important;
+-webkit-backdrop-filter: blur(var(--glass-blur)) saturate(120%);
+backdrop-filter: blur(var(--glass-blur)) saturate(120%);
+border: 1px solid var(--glass-border);
+box-shadow: var(--glass-shadow);
+color: var(--cream);
 }
 
-/* ---------- 5. Buttons ------------------------------------------------------ */
-button {
-  color: var(--cream);
-  background: rgba(70, 50, 31, 0.6);
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  -webkit-backdrop-filter: blur(8px);
-  backdrop-filter: blur(8px);
-  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+dialog,
+.dialog {
+border-radius: 12px;
 }
 
-button:hover {
-  background: var(--honey);
-  color: var(--wood-darkest);
-  border-color: var(--honey-hover);
+/* Navigation-Items in der Seitenleiste */
+.navMenuOption:hover,
+.navMenuOption-selected,
+.sidebarItem:hover {
+background: rgba(216, 154, 74, 0.18) !important;
+color: var(--honey-hover) !important;
+}
+
+/* ---------- 5. Buttons & Interaktion -------------------------------------- */
+button,
+.raised,
+.fab,
+.emby-button {
+color: var(--cream);
+background: rgba(70, 50, 31, 0.6);
+border: 1px solid var(--border);
+border-radius: 6px;
+-webkit-backdrop-filter: blur(8px);
+backdrop-filter: blur(8px);
+transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.1s ease;
+}
+
+button:hover,
+.raised:hover,
+.emby-button:hover {
+background: var(--honey) !important;
+color: var(--wood-darkest) !important;
+border-color: var(--honey-hover);
+}
+
+/* Pfeile ‹ › neben den Scrollzeilen */
+.emby-scrollbuttons-button {
+color: var(--honey) !important;
+background: rgba(36, 25, 18, 0.7) !important;
+border: 1px solid var(--border) !important;
+border-radius: 50% !important;
+-webkit-backdrop-filter: blur(8px);
+backdrop-filter: blur(8px);
+}
+
+.emby-scrollbuttons-button:hover:not(:disabled) {
+background: var(--honey) !important;
+color: var(--wood-darkest) !important;
 }
 
 /* ---------- 6. Eingabefelder ------------------------------------------------ */
 input,
 select,
-textarea {
-  background: rgba(36, 25, 18, 0.6);
-  color: var(--cream);
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  -webkit-backdrop-filter: blur(8px);
-  backdrop-filter: blur(8px);
+textarea,
+.emby-input,
+.emby-select,
+.emby-textarea {
+background: rgba(36, 25, 18, 0.6) !important;
+color: var(--cream) !important;
+border: 1px solid var(--border) !important;
+border-radius: 6px;
+-webkit-backdrop-filter: blur(8px);
+backdrop-filter: blur(8px);
 }
 
 input:focus,
 select:focus,
-textarea:focus {
-  border-color: var(--honey);
-  outline: none;
-  box-shadow: 0 0 0 2px rgba(216, 154, 74, 0.25);
+textarea:focus,
+.emby-input:focus,
+.emby-select:focus {
+border-color: var(--honey) !important;
+outline: none;
+box-shadow: 0 0 0 2px rgba(216, 154, 74, 0.3);
 }
 
-/* ---------- 7. Scrollleiste ------------------------------------------------- */
-::-webkit-scrollbar {
-  width: 10px;
-}
-
-::-webkit-scrollbar-track {
-  background: var(--wood-darkest);
-}
-
-::-webkit-scrollbar-thumb {
-  background: var(--wood-light);
-  border-radius: 5px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: var(--honey);
-}
-
-/* ---------- 8. Oberfläche im 12.x-Layout -----------------------------------
-   Klassen aus der F12-Prüfung auf Jellyfin 12.x. */
-
-/* Schwarze Container transparent machen, damit das Holzbild durchscheint */
-.libraryDocument,
-.withSectionTabs,
-.mainAnimatedPage,
-.verticalSection,
-.emby-scroller-container,
-.emby-scrollbuttons {
-  background-color: transparent !important;
-}
-
-/* Abschnittstitel (z. B. „Continue Watching“) */
-.sectionTitle,
-.sectionTitle-cards {
-  color: var(--cream);
-  letter-spacing: 0.02em;
-}
-
-/* Pfeile ‹ › neben den Zeilen */
-.emby-scrollbuttons-button {
-  color: var(--honey);
-  background: rgba(36, 25, 18, 0.6);
-  border: 1px solid var(--border);
-  border-radius: 50%;
-  -webkit-backdrop-filter: blur(8px);
-  backdrop-filter: blur(8px);
-  transition: background 0.2s ease, color 0.2s ease;
-}
-
-.emby-scrollbuttons-button:hover:not(:disabled) {
-  background: var(--honey);
-  color: var(--wood-darkest);
-}
-
-.emby-scrollbuttons-button:disabled {
-  opacity: 0.3;
-}
-
-/* Karten: Glas-Rahmen und warmer Schatten */
+/* ---------- 7. Medien-Karten & Postereffekte -------------------------------- */
 .cardBox {
-  border-radius: 8px;
+border-radius: 8px;
 }
 
 .cardImageContainer {
-  border-radius: 6px;
-  box-shadow: var(--glass-shadow);
+border-radius: 6px;
+box-shadow: var(--glass-shadow);
+transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .cardBox:hover .cardImageContainer {
-  box-shadow: 0 0 0 2px var(--honey), 0 6px 18px rgba(0, 0, 0, 0.6);
+transform: translateY(-4px);
+box-shadow: 0 0 0 2px var(--honey), 0 10px 24px rgba(0, 0, 0, 0.7);
 }
 
-/* Overlay-Buttons auf Karten (Play, Häkchen, Herz) als Glas */
+.cardText,
+.cardHeader {
+color: var(--cream);
+}
+
+.cardText-secondary {
+color: var(--muted);
+}
+
+/* Overlay-Buttons auf Karten (Play, Häkchen, Herz) */
 .cardOverlayButton {
-  background: rgba(36, 25, 18, 0.7);
-  border: 1px solid var(--border);
-  -webkit-backdrop-filter: blur(10px);
-  backdrop-filter: blur(10px);
+background: rgba(36, 25, 18, 0.8) !important;
+border: 1px solid var(--border) !important;
+color: var(--cream) !important;
+-webkit-backdrop-filter: blur(10px);
+backdrop-filter: blur(10px);
+border-radius: 50%;
 }
 
 .cardOverlayButton:hover {
-  background: var(--honey);
-  color: var(--wood-darkest);
+background: var(--honey) !important;
+color: var(--wood-darkest) !important;
+}
+
+/* ---------- 8. Player & OSD (Bottom Bar) ----------------------------------- */
+.appFooter,
+.osdBottomBar {
+background: var(--glass-bg-strong) !important;
+-webkit-backdrop-filter: blur(var(--glass-blur));
+backdrop-filter: blur(var(--glass-blur));
+border-top: 1px solid var(--glass-border);
+}
+
+.itemProgressBarForeground {
+background-color: var(--honey) !important;
+}
+
+/* ---------- 9. Scrollbar --------------------------------------------------- */
+::-webkit-scrollbar {
+width: 10px;
+height: 10px;
+}
+
+::-webkit-scrollbar-track {
+background: var(--wood-darkest);
+}
+
+::-webkit-scrollbar-thumb {
+background: var(--wood-light);
+border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+background: var(--honey);
 }
