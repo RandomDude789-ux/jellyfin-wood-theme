@@ -1,0 +1,14 @@
+/* Mein Theme v1.0.0 */
+:root {
+  --accent: #7b5cff;
+}
+
+body {
+  background: #0d0d12;
+}
+
+/* Beispiel: Akzentfarbe für Links und Buttons */
+a,
+.emby-button {
+  color: var(--accent);
+}
