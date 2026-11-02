@@ -1,6 +1,6 @@
 /* ==========================================================================
-Holz-Theme v1.2.1 – Clean Glassmorphism
-Ziel: Jellyfin 10.9+ / 12.x Modern Layout
+Holz-Theme v1.3.0 – Functional Clean Fix
+Ziel: Jellyfin 10.9+ / 12.x
 ========================================================================== */
 
 /* ---------- 1. Variablen --------------------------------------------------- /
@@ -19,21 +19,30 @@ Ziel: Jellyfin 10.9+ / 12.x Modern Layout
 --border:       rgba(223, 155, 66, 0.25);
 
 /* Glas */
---glass-bg:        rgba(26, 17, 11, 0.55);
---glass-bg-strong: rgba(20, 13, 8, 0.78);
+--glass-bg:        rgba(26, 17, 11, 0.65);
+--glass-bg-strong: rgba(20, 13, 8, 0.85);
 --glass-border:    rgba(245, 232, 213, 0.15);
---glass-blur:      18px;
---glass-shadow:    0 8px 32px rgba(0, 0, 0, 0.45);
+--glass-blur:      16px;
 
-/* Hintergrundbild: Platzhalter aus Unsplash */
+/* Funktionierender Holz-Hintergrund (Unsplash Platzhalter) */
 --bg-image: url("https://images.unsplash.com/photo-1546484475-7f7bd55792da?q=80&w=2000&auto=format&fit=crop");
 
 color-scheme: dark;
 }
 
-/* ---------- 2. Transparenz-Overrides --------------------------------------- */
+/* ---------- 2. Globaler Holz-Hintergrund ----------------------------------- */
 html,
-body,
+body {
+background-color: var(--wood-darkest) !important;
+background-image: linear-gradient(180deg, rgba(15, 10, 6, 0.3) 0%, rgba(15, 10, 6, 0.7) 100%), var(--bg-image) !important;
+background-size: cover !important;
+background-position: center !important;
+background-attachment: fixed !important;
+background-repeat: no-repeat !important;
+color: var(--cream) !important;
+}
+
+/* ---------- 3. Jellyfin Container Transparent Schalten --------------------- */
 #reactRoot,
 #reactRoot > div,
 .skinBody,
@@ -49,42 +58,20 @@ body,
 .mainLayout,
 .pageTabContent,
 .itemDetailPage,
-.detailPagePrimaryContainer {
+.detailPagePrimaryContainer,
+.sectionTitleContainer {
 background: transparent !important;
 background-color: transparent !important;
-}
-
-/* ---------- 3. Globaler Holz-Hintergrund ----------------------------------- */
-html {
-background-color: var(--wood-darkest) !important;
-}
-
-body::before {
-content: "";
-position: fixed;
-top: 0;
-left: 0;
-right: 0;
-bottom: 0;
-z-index: -2;
-pointer-events: none;
-background-image:
-linear-gradient(180deg, rgba(15, 10, 6, 0.4) 0%, rgba(15, 10, 6, 0.75) 100%),
-var(--bg-image);
-background-size: cover;
-background-position: center;
-background-repeat: no-repeat;
-background-attachment: fixed;
+box-shadow: none !important;
 }
 
 /* ---------- 4. Header & Top-Navigation ------------------------------------- */
 .skinHeader,
 .headerTop {
 background: var(--glass-bg) !important;
--webkit-backdrop-filter: blur(var(--glass-blur)) saturate(130%);
-backdrop-filter: blur(var(--glass-blur)) saturate(130%);
+-webkit-backdrop-filter: blur(var(--glass-blur));
+backdrop-filter: blur(var(--glass-blur));
 border-bottom: 1px solid var(--glass-border) !important;
-box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 }
 
 .headerTabs,
@@ -98,7 +85,7 @@ font-weight: 600;
 border-radius: 20px !important;
 padding: 6px 16px !important;
 margin: 0 4px !important;
-transition: all 0.25s ease !important;
+transition: all 0.2s ease !important;
 }
 
 .emby-tab-button:hover {
@@ -109,27 +96,19 @@ background: rgba(223, 155, 66, 0.15) !important;
 .emby-tab-button-active {
 color: var(--wood-darkest) !important;
 background: var(--honey) !important;
-box-shadow: 0 2px 10px rgba(223, 155, 66, 0.4);
 }
 
 .emby-tab-button-active .tabButtonText {
 color: var(--wood-darkest) !important;
 }
 
-/* ---------- 5. Abschnittstitel --------------------------------------------- */
-.sectionTitleContainer {
-background: transparent !important;
-box-shadow: none !important;
-}
-
+/* ---------- 5. Typografie & Titel ------------------------------------------- */
 .sectionTitle,
-.sectionTitle-cards {
+.sectionTitle-cards,
+h1, h2, h3 {
 color: var(--cream) !important;
-font-size: 1.45rem;
-font-weight: 700;
-letter-spacing: 0.03em;
-text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
-padding: 8px 0;
+letter-spacing: 0.02em;
+text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
 }
 
 .sectionTitleButton {
@@ -137,27 +116,20 @@ color: var(--honey) !important;
 background: transparent !important;
 }
 
-.sectionTitleButton:hover {
-color: var(--honey-hover) !important;
-}
-
-/* ---------- 6. Karten & Poster --------------------------------------------- */
+/* ---------- 6. Karten & Hover-Effekt --------------------------------------- */
 .cardBox {
-border-radius: 10px;
 background: transparent !important;
 }
 
 .cardImageContainer {
 border-radius: 8px !important;
-box-shadow: var(--glass-shadow);
-border: 1px solid rgba(245, 232, 213, 0.08);
-transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.25s ease, border-color 0.25s ease !important;
+border: 1px solid rgba(245, 232, 213, 0.1);
+transition: transform 0.2s ease, border-color 0.2s ease !important;
 }
 
 .cardBox:hover .cardImageContainer {
-transform: translateY(-6px) scale(1.02);
-border-color: var(--honey);
-box-shadow: 0 12px 28px rgba(0, 0, 0, 0.8), 0 0 15px rgba(223, 155, 66, 0.3);
+transform: translateY(-4px);
+border-color: var(--honey) !important;
 }
 
 .cardText {
@@ -168,23 +140,7 @@ color: var(--cream) !important;
 color: var(--muted) !important;
 }
 
-.cardOverlayButton {
-background: var(--glass-bg-strong) !important;
-border: 1px solid var(--border) !important;
-color: var(--cream) !important;
--webkit-backdrop-filter: blur(8px);
-backdrop-filter: blur(8px);
-border-radius: 50% !important;
-transition: all 0.2s ease !important;
-}
-
-.cardOverlayButton:hover {
-background: var(--honey) !important;
-color: var(--wood-darkest) !important;
-transform: scale(1.1);
-}
-
-/* ---------- 7. Pfeile (Scroll-Buttons) ------------------------------------- */
+/* ---------- 7. Buttons & Menüs --------------------------------------------- */
 .emby-scrollbuttons-button {
 color: var(--cream) !important;
 background: var(--glass-bg-strong) !important;
@@ -192,36 +148,24 @@ border: 1px solid var(--glass-border) !important;
 border-radius: 50% !important;
 -webkit-backdrop-filter: blur(10px);
 backdrop-filter: blur(10px);
-box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
 }
 
 .emby-scrollbuttons-button:hover:not(:disabled) {
 background: var(--honey) !important;
 color: var(--wood-darkest) !important;
-border-color: var(--honey-hover) !important;
 }
 
-/* ---------- 8. Menüs & Seitenleisten --------------------------------------- */
 .mainDrawer,
 .sidebarContainer,
 dialog,
-.dialog,
 .paperList {
 background: var(--glass-bg-strong) !important;
--webkit-backdrop-filter: blur(var(--glass-blur)) saturate(120%);
-backdrop-filter: blur(var(--glass-blur)) saturate(120%);
+-webkit-backdrop-filter: blur(var(--glass-blur));
+backdrop-filter: blur(var(--glass-blur));
 border-right: 1px solid var(--glass-border);
-box-shadow: var(--glass-shadow);
 }
 
-.navMenuOption:hover,
-.navMenuOption-selected {
-background: rgba(223, 155, 66, 0.18) !important;
-color: var(--honey-hover) !important;
-border-radius: 6px;
-}
-
-/* ---------- 9. Scrollbar --------------------------------------------------- */
+/* ---------- 8. Scrollbar --------------------------------------------------- */
 ::-webkit-scrollbar {
 width: 8px;
 height: 8px;
