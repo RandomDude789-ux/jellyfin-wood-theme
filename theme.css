@@ -1,14 +1,126 @@
-/* Mein Theme v1.0.0 */
+/* Holz-Theme v1.0.0 – warm & rustikal */
+
 :root {
-  --accent: #7b5cff;
+  --wood-darkest: #1a120c;
+  --wood-dark:    #241912;
+  --wood-mid:     #33241a;
+  --wood-light:   #46321f;
+  --cream:        #f3e6d3;
+  --muted:        #bfa786;
+  --honey:        #d89a4a;
+  --honey-hover:  #e9b26c;
+  --border:       rgba(216, 154, 74, 0.22);
 }
 
+/* Hintergrund mit feiner Holzmaserung */
 body {
-  background: #0d0d12;
+  color: var(--cream);
+  background-color: var(--wood-darkest);
+  background-image:
+    repeating-linear-gradient(92deg,
+      rgba(255, 255, 255, 0.015) 0 2px,
+      transparent 2px 11px),
+    linear-gradient(180deg, var(--wood-mid) 0%, var(--wood-darkest) 70%);
+  background-attachment: fixed;
 }
 
-/* Beispiel: Akzentfarbe für Links und Buttons */
-a,
-.emby-button {
-  color: var(--accent);
+/* Seitenleiste und Kopfzeile */
+.skinHeader,
+.mainDrawer {
+  background: linear-gradient(180deg, var(--wood-dark), var(--wood-darkest));
+  border-color: var(--border);
+}
+
+/* Überschriften und Text */
+h1, h2, h3, .sectionTitle {
+  color: var(--cream);
+  letter-spacing: 0.02em;
+}
+
+.secondary,
+.cardText-secondary {
+  color: var(--muted);
+}
+
+/* Karten (Poster, Serien, Alben) */
+.cardBox,
+.card {
+  border-radius: 6px;
+}
+
+.cardOverlayButton,
+.cardImageContainer {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.45);
+}
+
+.cardBox:hover .cardImageContainer {
+  box-shadow: 0 0 0 2px var(--honey), 0 6px 18px rgba(0, 0, 0, 0.6);
+}
+
+/* Buttons */
+.emby-button,
+.raised {
+  background: var(--wood-light);
+  color: var(--cream);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.emby-button:hover,
+.raised:hover {
+  background: var(--honey);
+  color: var(--wood-darkest);
+  border-color: var(--honey-hover);
+}
+
+/* Eingabefelder */
+.emby-input,
+.emby-select,
+.emby-textarea {
+  background: var(--wood-dark);
+  color: var(--cream);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+}
+
+.emby-input:focus,
+.emby-select:focus,
+.emby-textarea:focus {
+  border-color: var(--honey);
+  outline: none;
+}
+
+/* Navigation: aktiver Eintrag */
+.navMenuOption-selected,
+.navMenuOption.selected {
+  color: var(--honey);
+  border-left: 3px solid var(--honey);
+}
+
+/* Fortschrittsbalken */
+.itemProgressBar {
+  background: var(--wood-light);
+}
+
+.itemProgressBarForeground {
+  background: var(--honey);
+}
+
+/* Dezente Scrollleiste */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--wood-darkest);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--wood-light);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--honey);
 }
