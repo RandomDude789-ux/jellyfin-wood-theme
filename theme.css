@@ -1,32 +1,76 @@
-/* Holz-Theme v1.0.1 – warm & rustikal (Jellyfin 12.x) */
+/* ==========================================================================
+   Holz-Theme v1.1.0 – warm, rustikal, Glasmorphism
+   Ziel: Jellyfin 12.x (Modern Layout)
+   ========================================================================== */
 
-/* ---------- 1. Farbvariablen ---------- */
+/* ---------- 1. Variablen ---------------------------------------------------
+   Hier ändern sich Farben, Glasstärke und das Hintergrundbild zentral.
+   --bg-image: die Bildadresse einfügen, z. B.
+   url("https://i.imgur.com/XXXXXXX.jpg")
+   ------------------------------------------------------------------------- */
 :root {
+  /* Holztöne */
   --wood-darkest: #1a120c;
   --wood-dark:    #241912;
   --wood-mid:     #33241a;
   --wood-light:   #46321f;
+
+  /* Text und Akzente */
   --cream:        #f3e6d3;
   --muted:        #bfa786;
   --honey:        #d89a4a;
   --honey-hover:  #e9b26c;
   --border:       rgba(216, 154, 74, 0.22);
 
+  /* Glas */
+  --glass-bg:     rgba(36, 25, 18, 0.55);
+  --glass-bg-strong: rgba(26, 18, 12, 0.72);
+  --glass-border: rgba(243, 230, 211, 0.12);
+  --glass-blur:   16px;
+  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+
+  /* Hintergrund (Platzhalter, wird durch dein Bild ersetzt) */
+  --bg-image:     url("https://cdn.jsdelivr.net/gh/RandomDude789-ux/jellyfin-wood-theme/assets/wood.jpeg");
+
   color-scheme: dark;
 }
 
-/* ---------- 2. Grundlayout (elementbasiert, versionsunabhängig) ---------- */
+/* ---------- 2. Hintergrund -------------------------------------------------
+   Bild liegt fest hinter der Oberfläche. Ohne Bild bleibt die Holzmaserung. */
+html,
+body {
+  background-color: var(--wood-darkest);
+}
+
 body {
   color: var(--cream);
-  background-color: var(--wood-darkest);
   background-image:
+    var(--bg-image),
     repeating-linear-gradient(92deg,
       rgba(255, 255, 255, 0.015) 0 2px,
       transparent 2px 11px),
     linear-gradient(180deg, var(--wood-mid) 0%, var(--wood-darkest) 70%);
+  background-size: cover, auto, auto;
+  background-position: center, center, center;
   background-attachment: fixed;
+  background-repeat: no-repeat, repeat, no-repeat;
 }
 
+/* Leichter warmer Schleier über dem Bild, damit Text lesbar bleibt */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    rgba(26, 18, 12, 0.35) 0%,
+    rgba(26, 18, 12, 0.65) 100%
+  );
+}
+
+/* ---------- 3. Typografie --------------------------------------------------- */
 h1, h2, h3 {
   color: var(--cream);
   letter-spacing: 0.02em;
@@ -34,31 +78,59 @@ h1, h2, h3 {
 
 a {
   color: var(--honey);
+  transition: color 0.2s ease;
 }
 
 a:hover {
   color: var(--honey-hover);
 }
 
-/* Buttons */
+/* ---------- 4. Glas-Oberflächen (Kopfzeile, Menüs, Dialoge) ---------------
+   Element-basiert, damit es unabhängig von Klassennamen wirkt. */
+header,
+aside,
+nav,
+dialog {
+  background: var(--glass-bg);
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(120%);
+  backdrop-filter: blur(var(--glass-blur)) saturate(120%);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+  color: var(--cream);
+}
+
+dialog {
+  background: var(--glass-bg-strong);
+  border-radius: 10px;
+}
+
+/* ---------- 5. Buttons ------------------------------------------------------ */
 button {
+  color: var(--cream);
+  background: rgba(70, 50, 31, 0.6);
   border: 1px solid var(--border);
-  border-radius: 4px;
-  transition: background 0.2s ease, border-color 0.2s ease;
+  border-radius: 6px;
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
 }
 
 button:hover {
+  background: var(--honey);
+  color: var(--wood-darkest);
   border-color: var(--honey-hover);
 }
 
-/* Eingabefelder */
+/* ---------- 6. Eingabefelder ------------------------------------------------ */
 input,
 select,
 textarea {
-  background: var(--wood-dark);
+  background: rgba(36, 25, 18, 0.6);
   color: var(--cream);
   border: 1px solid var(--border);
-  border-radius: 4px;
+  border-radius: 6px;
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
 }
 
 input:focus,
@@ -66,9 +138,10 @@ select:focus,
 textarea:focus {
   border-color: var(--honey);
   outline: none;
+  box-shadow: 0 0 0 2px rgba(216, 154, 74, 0.25);
 }
 
-/* Scrollleiste */
+/* ---------- 7. Scrollleiste ------------------------------------------------- */
 ::-webkit-scrollbar {
   width: 10px;
 }
@@ -86,6 +159,6 @@ textarea:focus {
   background: var(--honey);
 }
 
-/* ---------- 3. Oberfläche im 12.x-Layout ----------
-   Hier kommen die Klassen rein, sobald wir sie per F12 bestätigt haben.
-   Bis dahin bleibt dieser Block leer, damit nichts Falsches greift. */
+/* ---------- 8. Oberfläche im 12.x-Layout -----------------------------------
+   Klassenbasierte Regeln (Poster-Karten, Seitenmenü, aktiver Eintrag,
+   Fortschrittsbalken). Kommt nach der F12-Prüfung hierher. */
